@@ -1,6 +1,6 @@
 ﻿// Ignore Spelling: Disconfirm
 
-using OtekBillingMetering.Business.Abstractions.BaseTypes;
+using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Business.Common.Exceptions;
 using OtekBillingMetering.Business.ValueObjects;
 

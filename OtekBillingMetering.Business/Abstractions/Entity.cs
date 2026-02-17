@@ -1,4 +1,4 @@
-﻿namespace OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿namespace OtekBillingMetering.Business.Abstractions;
 
 public abstract class Entity<TKey> : IEntity where TKey : notnull, IEquatable<TKey>
 {
@@ -26,8 +26,8 @@ public abstract class Entity<TKey> : IEntity where TKey : notnull, IEquatable<TK
 		Id.Equals(default);
 
 	public override bool Equals(object? obj) => obj != null && obj is Entity<TKey> entity 
-		&& (ReferenceEquals(this, obj) || (GetType() == obj.GetType() && !entity.IsTransient() 
-			&& !IsTransient() && entity.Id.Equals(Id)));
+		&& (ReferenceEquals(this, obj) || GetType() == obj.GetType() && !entity.IsTransient() 
+			&& !IsTransient() && entity.Id.Equals(Id));
 
 	public override int GetHashCode()
 	{

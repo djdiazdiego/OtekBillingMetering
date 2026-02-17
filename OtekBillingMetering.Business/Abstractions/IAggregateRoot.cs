@@ -1,6 +1,6 @@
 ﻿using OtekBillingMetering.Mediator.Abstractions;
 
-namespace OtekBillingMetering.Business.Abstractions.BaseTypes;
+namespace OtekBillingMetering.Business.Abstractions;
 
 public interface IAggregateRoot
 {

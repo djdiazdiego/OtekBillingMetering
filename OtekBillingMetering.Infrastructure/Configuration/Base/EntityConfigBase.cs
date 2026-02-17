@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OtekBillingMetering.Business.Abstractions.BaseTypes;
+using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Infrastructure.Configuration.Conventions;
 
 namespace OtekBillingMetering.Infrastructure.Configuration.Base;

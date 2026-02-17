@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using OtekBillingMetering.Business.Abstractions.BaseTypes;
+using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Infrastructure.Persistence.DbContexts;
 using OtekBillingMetering.Mediator.Abstractions;
 

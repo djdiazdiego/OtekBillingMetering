@@ -1,4 +1,4 @@
-﻿using OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿using OtekBillingMetering.Business.Abstractions;
 using System.Linq.Expressions;
 
 namespace OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Base;

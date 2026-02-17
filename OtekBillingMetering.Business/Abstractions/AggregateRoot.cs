@@ -1,6 +1,6 @@
 ﻿using OtekBillingMetering.Mediator.Abstractions;
 
-namespace OtekBillingMetering.Business.Abstractions.BaseTypes;
+namespace OtekBillingMetering.Business.Abstractions;
 
 public abstract class AggregateRoot<TKey> : Entity<TKey>, IAggregateRoot
 	where TKey : notnull, IEquatable<TKey>

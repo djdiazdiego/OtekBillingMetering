@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using OtekBillingMetering.Execution.Behaviors.Options;
 
-namespace OtekBillingMetering.Execution.Behaviors;
+namespace OtekBillingMetering.Execution.Behaviors.Extensions;
 
 internal static class BehaviorExtensions
 {

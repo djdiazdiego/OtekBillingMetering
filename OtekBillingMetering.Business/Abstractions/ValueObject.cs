@@ -1,4 +1,4 @@
-﻿namespace OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿namespace OtekBillingMetering.Business.Abstractions;
 
 public abstract class ValueObject
 {

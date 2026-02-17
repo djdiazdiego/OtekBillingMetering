@@ -1,4 +1,4 @@
-﻿using OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Business.Common.Exceptions;
 
 namespace OtekBillingMetering.Business.Models.IdentityModels;

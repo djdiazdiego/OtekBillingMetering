@@ -1,4 +1,4 @@
-﻿using OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿using OtekBillingMetering.Business.Abstractions;
 
 namespace OtekBillingMetering.Execution.Abstractions.Persistence.Specifications;
 

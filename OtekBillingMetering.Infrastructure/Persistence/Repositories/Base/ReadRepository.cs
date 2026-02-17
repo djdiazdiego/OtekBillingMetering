@@ -1,4 +1,4 @@
-﻿using OtekBillingMetering.Business.Abstractions.BaseTypes;
+﻿using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Base;
 using OtekBillingMetering.Execution.Abstractions.Persistence.Specifications;
 using OtekBillingMetering.Execution.Abstractions.Wrappers;
