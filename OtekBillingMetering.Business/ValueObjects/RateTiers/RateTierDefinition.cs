@@ -61,7 +61,7 @@ public sealed record RateTierDefinition
 			throw new DomainValidationException("UnitsPerCharge cannot be negative.");
 		}
 
-		var requiresRange = rateTierType is RateTierType.RangeUsage or RateTierType.TimeRelatedRangeUsage;
+		var requiresRange = rateTierType is RateTierType.RangeUsage;
 		if(requiresRange)
 		{
 			if(!from.HasValue)
@@ -80,7 +80,7 @@ public sealed record RateTierDefinition
 			to = null;
 		}
 
-		if(rateTierType is RateTierType.TimeRelatedPercentage || rateTierType is RateTierType.Percentage)
+		if(rateTierType is RateTierType.Percentage)
 		{
 			if(percentageTargetTierNames is null || percentageTargetTierNames.Count == 0)
 			{
@@ -96,11 +96,11 @@ public sealed record RateTierDefinition
 				.Distinct(StringComparer.Ordinal)];
 		}
 
-		var requiresTimeWindow = rateTierType is
-			RateTierType.TimeRelatedFlat or
-			RateTierType.TimeRelatedRangeUsage or
-			RateTierType.TimeRelatedFlatUsage or
-			RateTierType.TimeRelatedPercentage;
+		var requiresTimeWindow = 
+			monthFrom != null ||
+			dayOfMonthFrom != null ||
+			weekdayFrom != null ||
+			timeOfDayFrom != null;
 
 		if(!requiresTimeWindow)
 		{

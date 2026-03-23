@@ -5,9 +5,5 @@ public enum RateTierType
 	Flat,
 	FlatUsage,
 	RangeUsage,
-	Percentage,
-	TimeRelatedFlat,
-	TimeRelatedFlatUsage,
-	TimeRelatedRangeUsage,
-	TimeRelatedPercentage
+	Percentage
 }

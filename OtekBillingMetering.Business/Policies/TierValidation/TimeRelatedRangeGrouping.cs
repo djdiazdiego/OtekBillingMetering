@@ -8,7 +8,7 @@ public static class TimeRelatedRangeGrouping
 {
 	public static IReadOnlyDictionary<RateTierTimeWindowKey, List<RateTier>> Group(
 		IReadOnlyCollection<RateTier> tiers) => tiers
-			.Where(t => t.RateTierType == RateTierType.TimeRelatedRangeUsage)
+			.Where(t => t.RateTierType == RateTierType.RangeUsage && t.IsTimeRelated)
 			.GroupBy(RateTierTimeWindowKey.FromTier)
 			.ToDictionary(g => g.Key, g => g.ToList());
 }

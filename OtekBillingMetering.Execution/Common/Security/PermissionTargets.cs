@@ -2,7 +2,7 @@
 
 public static class PermissionTargets
 {
-	public static class Identity
+	public static class IdentityTargets
 	{
 		public const string Accounts = "identity.accounts";
 		public const string Users = "identity.users";
@@ -11,13 +11,13 @@ public static class PermissionTargets
 		public const string Policies = "identity.policies";
 	}
 
-	public static class Utility
+	public static class UtilityTargets
 	{
 		public const string Providers = "utility.providers";
 		public const string Services = "utility.services";
 	}
 
-	public static class Billing
+	public static class BillingTargets
 	{
 		public const string Statements = "billing.statements";
 		public const string Run = "billing.run";
@@ -25,20 +25,20 @@ public static class PermissionTargets
 		public const string Payments = "billing.payments";
 	}
 
-	public static class Metering
+	public static class MeteringTargets
 	{
 		public const string Meters = "metering.meters";
 		public const string Readings = "metering.readings";
 		public const string Rates = "metering.rates";
 	}
 
-	public static class Rate
+	public static class RateTargets
 	{
 		public const string Plans = "rate.plans";
 		public const string Tiers = "rate.tiers";
 	}
 
-	public static class System
+	public static class SystemTargets
 	{
 		public const string Settings = "system.settings";
 		public const string Logs = "system.logs";

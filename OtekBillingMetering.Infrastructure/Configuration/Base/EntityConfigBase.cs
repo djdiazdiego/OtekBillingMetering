@@ -16,8 +16,12 @@ internal abstract class EntityConfigBase<TEntity> : IEntityTypeConfiguration<TEn
 
 	protected virtual bool IsIdGeneratedByDatabase => true;
 
+	protected virtual string TableName => typeof(TEntity).Name;
+
 	protected virtual void ConfigureBase(EntityTypeBuilder<TEntity> builder)
 	{
+		builder.ToTable(TableName);
+
 		builder.HasKey(x => x.Id);
 
 		if(IsIdGeneratedByDatabase)
@@ -28,6 +32,12 @@ internal abstract class EntityConfigBase<TEntity> : IEntityTypeConfiguration<TEn
 		{
 			builder.Property(x => x.Id).ValueGeneratedNever();
 		}
+
+		builder.Property(x => x.CreationDate)
+			.IsRequired();
+
+		builder.Property(x => x.LastUpdateDate)
+			.IsRequired(false);
 
 		builder.Property(x => x.Version)
 			.IsRowVersion()

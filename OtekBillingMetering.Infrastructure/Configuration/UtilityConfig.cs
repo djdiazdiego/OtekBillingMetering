@@ -1,36 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OtekBillingMetering.Business.Models.Billing;
-using OtekBillingMetering.Business.Models.BillingModels;
+using OtekBillingMetering.Business.Models.UtilityModels;
 using OtekBillingMetering.Business.ValueObjects;
 using OtekBillingMetering.Infrastructure.Configuration.Base;
 using OtekBillingMetering.Infrastructure.Configuration.Conventions;
 
-namespace OtekBillingMetering.Infrastructure.Configuration.BillingConfig;
+namespace OtekBillingMetering.Infrastructure.Configuration;
 
-internal sealed class BillingCompanyConfig : EntityConfigBase<BillingCompany>
+internal class UtilityConfig : EntityConfigBase<Utility>
 {
-	protected override void ConfigureEntity(EntityTypeBuilder<BillingCompany> builder)
-	{
-		builder.ToTable("BillingCompanies");
-
-		builder.Property(x => x.TenantId)
-			.IsRequired();
+	protected override void ConfigureEntity(EntityTypeBuilder<Utility> builder){
+		builder.ToTable("Utilities");
 
 		builder.Property(x => x.Name)
 			.IsRequired()
 			.HasMaxLength(256)
 			.IsUnicode(true);
 
+		builder.Property(x => x.Type)
+			.IsRequired();
+
 		builder.Property(x => x.Description)
 			.HasMaxLength(1024)
 			.IsUnicode(true);
 
-		builder.Property(x => x.IsActive)
-			.IsRequired()
-			.HasDefaultValue(true);
-
-		builder.Property(x => x.BillingType)
+		builder.Property(x => x.TenantId)
 			.IsRequired();
 
 		builder.HasIndex(x => x.TenantId);
@@ -76,41 +70,5 @@ internal sealed class BillingCompanyConfig : EntityConfigBase<BillingCompany>
 				.IsUnicode(true)
 				.IsRequired(false);
 		});
-
-		builder.Navigation(x => x.Clients).Metadata
-		.SetPropertyAccessMode(PropertyAccessMode.Field);
-
-		builder.Navigation(x => x.ClientLinks).Metadata
-			.SetPropertyAccessMode(PropertyAccessMode.Field);
-
-		builder.HasMany(x => x.Clients)
-			.WithMany()
-			.UsingEntity<BillingCompanyClientLink>(
-				l => l.HasOne(x => x.Client)
-					.WithMany()
-					.HasForeignKey(x => x.ClientId)
-					.OnDelete(DeleteBehavior.Cascade),
-				l => l.HasOne(x => x.Company)
-					.WithMany()
-					.HasForeignKey(x => x.CompanyId)
-					.OnDelete(DeleteBehavior.Cascade),
-				j =>
-				{
-					j.ToTable("BillingCompanyClientLinks");
-
-					j.HasKey(x => new { x.CompanyId, x.ClientId });
-
-					j.Property(x => x.IsActive)
-						.IsRequired()
-						.HasDefaultValue(true);
-
-					j.HasIndex(x => new { x.CompanyId, x.IsActive });
-					j.HasIndex(x => new { x.ClientId, x.IsActive });
-				});
-
-		builder.HasMany(x => x.ClientLinks)
-			.WithOne(x => x.Company)
-			.HasForeignKey(x => x.CompanyId)
-			.OnDelete(DeleteBehavior.Cascade);
 	}
 }

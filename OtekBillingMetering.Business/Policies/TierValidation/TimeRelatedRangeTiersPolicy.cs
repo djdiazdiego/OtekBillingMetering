@@ -10,7 +10,7 @@ public static class TimeRelatedRangeTiersPolicy
 	public static void Validate(IReadOnlyCollection<RateTier> tiers, BillingPolicy billingPolicy)
 	{
 		var timeRanges = tiers
-			.Where(t => t.RateTierType == RateTierType.TimeRelatedRangeUsage)
+			.Where(t => t.RateTierType == RateTierType.RangeUsage && t.IsTimeRelated)
 			.ToList();
 
 		if(timeRanges.Count == 0)

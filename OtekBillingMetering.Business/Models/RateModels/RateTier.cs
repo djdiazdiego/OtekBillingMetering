@@ -47,8 +47,7 @@ public sealed class RateTier : Entity<Guid>
 		MonthFrom.HasValue || DayOfMonthFrom.HasValue || WeekdayFrom.HasValue || TimeOfDayFrom.HasValue;
 
 	[NotMapped]
-	internal bool IsPercentageTier =>
-		RateTierType is RateTierType.TimeRelatedPercentage || RateTierType is RateTierType.Percentage;
+	internal bool IsPercentageTier => RateTierType is RateTierType.Percentage;
 
 	internal void Update(RateTierDefinition definition) => Apply(definition);
 
@@ -279,14 +278,13 @@ public sealed class RateTier : Entity<Guid>
 		TimeOfDayTo = null;
 	}
 
-	private bool RequiresNumericRange() =>
-		RateTierType is RateTierType.RangeUsage or RateTierType.TimeRelatedRangeUsage;
+	private bool RequiresNumericRange() => RateTierType is RateTierType.RangeUsage;
 
 	private bool RequiresTimeWindow() =>
-		RateTierType is RateTierType.TimeRelatedFlat or
-		RateTierType.TimeRelatedRangeUsage or
-		RateTierType.TimeRelatedFlatUsage or
-		RateTierType.TimeRelatedPercentage;
+		MonthFrom != null ||
+		DayOfMonthFrom != null ||
+		WeekdayFrom != null ||
+		TimeOfDayFrom != null;
 
 	private static void EnsurePairParity<T>(T? from, T? to, string fromName, string toName) where T : struct
 	{
