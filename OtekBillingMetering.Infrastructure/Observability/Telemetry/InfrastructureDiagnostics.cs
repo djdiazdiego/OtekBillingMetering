@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
 
-namespace OtekBillingMetering.Infrastructure.Observability;
+namespace OtekBillingMetering.Infrastructure.Observability.Telemetry;
 
 internal static class InfrastructureDiagnostics
 {

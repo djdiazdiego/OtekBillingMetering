@@ -33,7 +33,7 @@ internal static class PersistenceExtensions
 	public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
 	{
 		var migrationsAssembly = typeof(WriteDbContext).Assembly;
-		var cs = configuration.GetConnectionString(PersistenceConstants.CONNECTION_STRING)
+		var cs = configuration.GetConnectionString(InfrastructureConstants.CONNECTION_STRING_NAME)
 			?? throw new InvalidOperationException("Missing connection string.");
 
 		services.AddScoped<ISaveChangesInterceptor, PublishDomainEventsInterceptor>();

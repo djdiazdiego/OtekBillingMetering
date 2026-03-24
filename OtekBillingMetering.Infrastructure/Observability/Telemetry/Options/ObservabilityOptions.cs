@@ -1,6 +1,6 @@
 ﻿// Ignore spelling: Otlp
 
-namespace OtekBillingMetering.Infrastructure.Observability.Options;
+namespace OtekBillingMetering.Infrastructure.Observability.Telemetry.Options;
 
 internal sealed class ObservabilityOptions
 {

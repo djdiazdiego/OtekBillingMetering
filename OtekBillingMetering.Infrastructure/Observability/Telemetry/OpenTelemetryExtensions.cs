@@ -4,9 +4,9 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using OtekBillingMetering.Execution.Observability;
-using OtekBillingMetering.Infrastructure.Observability.Options;
+using OtekBillingMetering.Infrastructure.Observability.Telemetry.Options;
 
-namespace OtekBillingMetering.Infrastructure.Observability;
+namespace OtekBillingMetering.Infrastructure.Observability.Telemetry;
 
 internal static class OpenTelemetryExtensions
 {

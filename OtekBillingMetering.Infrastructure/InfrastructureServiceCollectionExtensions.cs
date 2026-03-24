@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OtekBillingMetering.Infrastructure.Observability;
+using OtekBillingMetering.Infrastructure.Observability.Telemetry;
 using OtekBillingMetering.Infrastructure.Persistence;
 
 namespace OtekBillingMetering.Infrastructure;

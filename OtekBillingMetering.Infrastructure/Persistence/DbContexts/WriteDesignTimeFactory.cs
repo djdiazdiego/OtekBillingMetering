@@ -20,8 +20,8 @@ internal sealed class WriteDesignTimeFactory : IDesignTimeDbContextFactory<Write
 			.AddEnvironmentVariables()
 			.Build();
 
-		var connection = config.GetConnectionString(PersistenceConstants.CONNECTION_STRING)
-			?? throw new InvalidOperationException($"Connection string {PersistenceConstants.CONNECTION_STRING} not found.");
+		var connection = config.GetConnectionString(InfrastructureConstants.CONNECTION_STRING_NAME)
+			?? throw new InvalidOperationException($"Connection string {InfrastructureConstants.CONNECTION_STRING_NAME} not found.");
 
 		var options = new DbContextOptionsBuilder<WriteDbContext>();
 
