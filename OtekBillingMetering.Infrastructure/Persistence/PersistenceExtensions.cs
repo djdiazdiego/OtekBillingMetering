@@ -3,12 +3,28 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OtekBillingMetering.Execution.Abstractions.Persistence;
-using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read;
-using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read.BillingReadRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read.IdentityReadRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read.MenuItemReadRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read.RateReadRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Read.UtilityReadRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.BillingWriteRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.IdentityWriteRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.MenuItemWriteRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.RateWriteRepositories;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.UtilityWriteRepositories;
 using OtekBillingMetering.Infrastructure.Persistence.DbContexts;
 using OtekBillingMetering.Infrastructure.Persistence.Interceptors;
-using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read;
-using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read.BillingReadRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read.IdentityReadRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read.MenuItemReadRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read.RateReadRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Read.UtilityReadRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.BillingWriteRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.IdentityWriteRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.MenuItemWriteRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.RateWriteRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.UtilityWriteRepositories;
 
 namespace OtekBillingMetering.Infrastructure.Persistence;
 
@@ -61,12 +77,30 @@ internal static class PersistenceExtensions
 	public static IServiceCollection AddReadRepositories(this IServiceCollection services)
 	{
 		services.AddScoped<IAccountReadRepository, AccountReadRepository>();
+		services.AddScoped<IUserReadRepository, UserReadRepository>();
+		services.AddScoped<IRoleReadRepository, RoleReadRepository>();
+		services.AddScoped<IPolicyReadRepository, PolicyReadRepository>();
+		services.AddScoped<IGroupReadRepository, GroupReadRepository>();
+		services.AddScoped<IBillingCompanyReadRepository, BillingCompanyReadRepository>();
+		services.AddScoped<IBillingCompanyClientReadRepository, BillingCompanyClientReadRepository>();
+		services.AddScoped<IUtilityReadRepository, UtilityReadRepository>();
+		services.AddScoped<IRateReadRepository, RateReadRepository>();
+		services.AddScoped<IRateTierReadRepository, RateTierReadRepository>();
+		services.AddScoped<IMenuItemReadRepository, MenuItemReadRepository>();
 		return services;
 	}
 
 	public static IServiceCollection AddWriteRepositories(this IServiceCollection services)
 	{
 		services.AddScoped<IAccountWriteRepository, AccountWriteRepository>();
+		services.AddScoped<IUserWriteRepository, UserWriteRepository>();
+		services.AddScoped<IRoleWriteRepository, RoleWriteRepository>();
+		services.AddScoped<IPolicyWriteRepository, PolicyWriteRepository>();
+		services.AddScoped<IGroupWriteRepository, GroupWriteRepository>();
+		services.AddScoped<IBillingCompanyWriteRepository, BillingCompanyWriteRepository>();
+		services.AddScoped<IUtilityWriteRepository, UtilityWriteRepository>();
+		services.AddScoped<IRateWriteRepository, RateWriteRepository>();
+		services.AddScoped<IMenuItemWriteRepository, MenuItemWriteRepository>();
 		return services;
 	}
 }

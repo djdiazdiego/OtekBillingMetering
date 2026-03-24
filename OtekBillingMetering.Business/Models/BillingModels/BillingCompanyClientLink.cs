@@ -1,5 +1,4 @@
 ﻿using OtekBillingMetering.Business.Common.Exceptions;
-using OtekBillingMetering.Business.Models.Billing;
 
 namespace OtekBillingMetering.Business.Models.BillingModels;
 

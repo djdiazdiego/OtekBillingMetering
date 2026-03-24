@@ -103,5 +103,4 @@ internal abstract class WriteRepository<TEntity>(WriteDbContext dbContext)
 
 		Context.Set<TEntity>().UpdateRange(entities);
 	}
-
 }

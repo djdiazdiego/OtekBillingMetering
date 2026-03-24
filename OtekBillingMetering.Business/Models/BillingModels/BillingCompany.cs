@@ -1,10 +1,9 @@
 ﻿using OtekBillingMetering.Business.Abstractions;
 using OtekBillingMetering.Business.Common.Exceptions;
-using OtekBillingMetering.Business.Models.BillingModels;
 using OtekBillingMetering.Business.Models.BillingModels.Types;
 using OtekBillingMetering.Business.ValueObjects;
 
-namespace OtekBillingMetering.Business.Models.Billing;
+namespace OtekBillingMetering.Business.Models.BillingModels;
 
 public sealed class BillingCompany : AggregateRoot<Guid>
 {

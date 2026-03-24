@@ -1,0 +1,9 @@
+﻿using OtekBillingMetering.Business.Models.BillingModels;
+using OtekBillingMetering.Execution.Abstractions.Persistence.Repositories.Write.BillingWriteRepositories;
+using OtekBillingMetering.Infrastructure.Persistence.DbContexts;
+using OtekBillingMetering.Infrastructure.Persistence.Repositories.Base;
+
+namespace OtekBillingMetering.Infrastructure.Persistence.Repositories.Write.BillingWriteRepositories;
+
+internal sealed class BillingCompanyWriteRepository(WriteDbContext dbContext)
+	: WriteRepository<BillingCompany>(dbContext), IBillingCompanyWriteRepository;

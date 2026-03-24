@@ -6,7 +6,6 @@ public interface IPagedRequest
 {
 	int PageNumber { get; }
 	int PageSize { get; }
-
 	string? Search { get; }
 	string? SortBy { get; }
 	SortDirection SortDirection { get; }

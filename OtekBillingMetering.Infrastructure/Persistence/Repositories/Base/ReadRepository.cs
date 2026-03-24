@@ -4,8 +4,9 @@ using OtekBillingMetering.Execution.Abstractions.Persistence.Specifications;
 using OtekBillingMetering.Execution.Abstractions.Wrappers;
 using OtekBillingMetering.Execution.Common.Wrappers;
 using OtekBillingMetering.Infrastructure.Persistence.DbContexts;
-using OtekBillingMetering.Infrastructure.Persistence.Repositories.Base;
 using System.Linq.Expressions;
+
+namespace OtekBillingMetering.Infrastructure.Persistence.Repositories.Base;
 
 internal abstract class ReadRepository<TEntity>(ReadDbContext dbContext)
 	: RepositoryBase<TEntity>(dbContext), IReadRepository<TEntity>

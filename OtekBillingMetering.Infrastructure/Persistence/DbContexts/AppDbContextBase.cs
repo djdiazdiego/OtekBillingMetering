@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OtekBillingMetering.Business.Models.Billing;
 using OtekBillingMetering.Business.Models.BillingModels;
 using OtekBillingMetering.Business.Models.IdentityModels;
 using OtekBillingMetering.Business.Models.RateModels;

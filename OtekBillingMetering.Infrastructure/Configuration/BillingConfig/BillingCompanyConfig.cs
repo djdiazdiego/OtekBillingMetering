@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OtekBillingMetering.Business.Models.Billing;
 using OtekBillingMetering.Business.Models.BillingModels;
 using OtekBillingMetering.Business.ValueObjects;
 using OtekBillingMetering.Infrastructure.Configuration.Base;
