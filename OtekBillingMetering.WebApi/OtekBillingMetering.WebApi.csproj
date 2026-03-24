@@ -11,4 +11,8 @@
     <Folder Include="Endpoints\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OtekBillingMetering.Infrastructure\OtekBillingMetering.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

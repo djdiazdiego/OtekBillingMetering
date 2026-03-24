@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OtekBillingMetering.Infrastructure.Observability.HealthChecks;
 using OtekBillingMetering.Infrastructure.Observability.Telemetry;
 using OtekBillingMetering.Infrastructure.Persistence;
 
@@ -11,6 +12,7 @@ public static class InfrastructureServiceCollectionExtensions
 	{
 		services.AddPersistence(configuration);
 		services.AddObservability(configuration);
+		services.AddAppHealthChecks(configuration);
 
 		return services;
 	}

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OtekBillingMetering.Execution.Behaviors;
 using OtekBillingMetering.Execution.Behaviors.Extensions;
@@ -12,9 +13,15 @@ public static class ExecutionServiceCollectionExtensions
 	{
 		services.AddLoggingBehaviorOptions(configuration);
 
+		var currrentAssembly = typeof(ExecutionServiceCollectionExtensions).Assembly;
+
+		services.AddValidatorsFromAssembly(currrentAssembly);
+		ValidatorOptions.Global.DefaultClassLevelCascadeMode = CascadeMode.Continue;
+		ValidatorOptions.Global.DefaultRuleLevelCascadeMode = CascadeMode.Stop;
+
 		services.AddMediator(opt =>
 		{
-			opt.RegisterFromAssemblies(typeof(ExecutionServiceCollectionExtensions).Assembly);
+			opt.RegisterFromAssemblies(currrentAssembly);
 			opt.AddOpenBehavior(typeof(LoggingBehavior<,>));
 			opt.AddOpenBehavior(typeof(ValidationBehavior<,>));
 		});

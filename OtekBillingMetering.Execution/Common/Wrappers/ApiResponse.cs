@@ -10,14 +10,17 @@ public record ApiResponse
 	public static ApiResponse Ok(string? message = null, int status = 200)
 		=> new() { Success = true, Message = message, Status = status };
 
-	public static ApiResponse Fail(string? message = null, int status = 400, IReadOnlyList<ApiError>? errors = null)
-		=> new()
-		{
-			Success = false,
-			Message = message,
-			Status = status,
-			Errors = errors,
-		};
+	public static ApiResponse Fail(
+		string? message = "BadRequestException", 
+		int status = 400, 
+		IReadOnlyList<ApiError>? errors = null)
+			=> new()
+			{
+				Success = false,
+				Message = message,
+				Status = status,
+				Errors = errors,
+			};
 }
 
 public record ApiResponse<T> : ApiResponse
