@@ -59,8 +59,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 			}
 		}
 
+		var statusCode = 400;
+
 		logger.LogError(
-			"Validation error. Path: {Path}, TraceId: {TraceId}, Time: {Time}, Details: {Details}",
+			"Validation error. StatusCode: {StatusCode}, Path: {Path}, TraceId: {TraceId}, Time: {Time}, Details: {Details}",
+			statusCode,
 			context.HttpContext.Request.Path,
 			context.HttpContext.TraceIdentifier,
 			DateTime.UtcNow,

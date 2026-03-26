@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Text;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using OtekBillingMetering.Business.Common.Exceptions;
 using OtekBillingMetering.Execution.Common.Wrappers;
@@ -27,27 +28,31 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
 			errors: [],
 			status: statusCode);
 
-		await context.Response.WriteAsJsonAsync(response, cancellationToken: cancellationToken);
+		await context.Response.WriteAsJsonAsync(
+			response,
+			cancellationToken: cancellationToken);
 
 		return true;
 	}
 
 	private void LogException(HttpContext context, Exception exception, int statusCode)
 	{
+		var path = context.Request.Path;
+		var traceId = context.TraceIdentifier;
+		var time = DateTime.UtcNow;
+
 		if(exception is ValidationException validationException)
 		{
-			var validationErrors = validationException.Errors
-				.Select(error => $"{error.PropertyName}: {error.ErrorMessage}")
-				.ToArray();
+			var details = BuildValidationDetails(validationException);
 
 			logger.LogWarning(
 				exception,
-				"Validation error. StatusCode: {StatusCode}, Path: {Path}, TraceId: {TraceId}, Time: {Time}, Errors: {Errors}",
-				statusCode,
-				context.Request.Path,
-				context.TraceIdentifier,
-				DateTime.UtcNow,
-				validationErrors);
+				"Validation error. Path: {Path}, TraceId: {TraceId}, Time: {Time}, Details: {Details}",
+				path,
+				traceId,
+				time,
+				details);
+
 			return;
 		}
 
@@ -55,9 +60,21 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
 			exception,
 			"Unhandled exception. StatusCode: {StatusCode}, Path: {Path}, TraceId: {TraceId}, Time: {Time}",
 			statusCode,
-			context.Request.Path,
-			context.TraceIdentifier,
-			DateTime.UtcNow);
+			path,
+			traceId,
+			time);
+	}
+
+	private static string BuildValidationDetails(ValidationException validationException)
+	{
+		var details = new StringBuilder();
+
+		foreach(var error in validationException.Errors)
+		{
+			details.AppendLine($"{error.PropertyName}: {error.ErrorMessage}");
+		}
+
+		return details.ToString().TrimEnd();
 	}
 
 	private static int MapStatusCode(Exception exception) => exception switch
