@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi;
 using OtekBillingMetering.Execution;
 using OtekBillingMetering.Execution.Common.Wrappers;
 using OtekBillingMetering.Infrastructure;
 using OtekBillingMetering.WebApi.Configuration;
 using OtekBillingMetering.WebApi.Middlewares;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -98,20 +101,63 @@ builder.Services.AddRateLimiter(options =>
 	});
 });
 
-//builder.Services.AddEndpointsApiExplorer(); USE WITH SWAGGER
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+	c.EnableAnnotations();
+
+	c.SwaggerDoc("v1", new OpenApiInfo
+	{
+		Title = "Web API",
+		Version = "v1"
+	});
+
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+	{
+		Description = "Enter JWT token: Bearer {token}",
+		Name = "Authorization",
+		In = ParameterLocation.Header,
+		Type = SecuritySchemeType.Http,
+		Scheme = "bearer",
+		BearerFormat = "JWT"
+	});
+
+	c.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+	{
+		[new OpenApiSecuritySchemeReference("Bearer", document)] = []
+	});
+
+	var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+	c.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 
 app.UseExceptionHandler();
 
+app.UseSwagger();
+
 if(app.Environment.IsDevelopment())
 {
-
+	app.UseSwaggerUI(options =>
+	{
+		options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API v1");
+		options.RoutePrefix = "swagger";
+	});
 }
 else
 {
 	app.UseHsts();
 }
+
+app.UseReDoc(options =>
+{
+	options.DocumentTitle = "Web API Documentation";
+	options.SpecUrl = "/swagger/v1/swagger.json";
+	options.RoutePrefix = "docs";
+});
 
 app.UseHttpsRedirection();
 
