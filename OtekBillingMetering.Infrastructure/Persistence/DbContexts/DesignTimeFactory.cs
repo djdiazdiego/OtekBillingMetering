@@ -6,12 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace OtekBillingMetering.Infrastructure.Persistence.DbContexts;
 
-internal sealed class WriteDesignTimeFactory : IDesignTimeDbContextFactory<WriteDbContext>
+internal sealed class DesignTimeFactory : IDesignTimeDbContextFactory<WriteDbContext>
 {
 	public WriteDbContext CreateDbContext(string[] args)
 	{
-		var environment =
-		   Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+		var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 		var config = new ConfigurationBuilder()
 			.SetBasePath(AppContext.BaseDirectory)

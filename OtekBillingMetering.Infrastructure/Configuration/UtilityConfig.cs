@@ -32,8 +32,6 @@ internal class UtilityConfig : EntityConfigBase<Utility>
 
 		builder.OwnsOne(x => x.Address, owned =>
 		{
-			owned.Navigation(a => a).IsRequired(false);
-
 			owned.Property(a => a.First)
 				.HasColumnName($"{SqlServerDefaults.ADDRESS_PREFIX}{nameof(Address.First)}")
 				.HasMaxLength(200)
@@ -70,5 +68,7 @@ internal class UtilityConfig : EntityConfigBase<Utility>
 				.IsUnicode(true)
 				.IsRequired(false);
 		});
+
+		builder.Navigation(x => x.Address).IsRequired(false);
 	}
 }

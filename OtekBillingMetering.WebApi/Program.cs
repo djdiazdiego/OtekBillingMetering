@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using OtekBillingMetering.Execution;
 using OtekBillingMetering.Execution.Common.Wrappers;
@@ -141,6 +140,8 @@ app.UseSwagger();
 
 if(app.Environment.IsDevelopment())
 {
+	InfrastructureMigrationRunner.ApplyMigrationAsync(app.Configuration).Wait();
+
 	app.UseSwaggerUI(options =>
 	{
 		options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API v1");

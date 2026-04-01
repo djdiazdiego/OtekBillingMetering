@@ -62,8 +62,6 @@ internal sealed class UserConfig : EntityConfigBase<User>
 
 		builder.OwnsOne(x => x.Address, owned =>
 		{
-			owned.Navigation(a => a).IsRequired(false);
-
 			owned.Property(a => a.First)
 				.HasColumnName($"{SqlServerDefaults.ADDRESS_PREFIX}{nameof(Address.First)}")
 				.HasMaxLength(200)
@@ -101,6 +99,8 @@ internal sealed class UserConfig : EntityConfigBase<User>
 				.IsRequired(false);
 		});
 
+		builder.Navigation(x => x.Address).IsRequired(false);
+
 		builder.Navigation(x => x.Roles).Metadata
 			.SetPropertyAccessMode(PropertyAccessMode.Field);
 
@@ -111,7 +111,7 @@ internal sealed class UserConfig : EntityConfigBase<User>
 			.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 		builder.HasMany(x => x.Roles)
-			.WithMany()
+			.WithMany(x => x.Users)
 			.UsingEntity<Dictionary<string, object>>(
 				"UserRoles",
 				r => r.HasOne<Role>()
@@ -130,7 +130,7 @@ internal sealed class UserConfig : EntityConfigBase<User>
 				});
 
 		builder.HasMany(x => x.Groups)
-			.WithMany()
+			.WithMany(x => x.Users)
 			.UsingEntity<Dictionary<string, object>>(
 				"UserGroups",
 				g => g.HasOne<Group>()

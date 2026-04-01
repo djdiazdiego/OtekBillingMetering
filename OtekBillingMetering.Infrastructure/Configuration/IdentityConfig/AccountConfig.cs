@@ -36,7 +36,7 @@ internal sealed class AccountConfig : EntityConfigBase<Account>
 		builder.HasOne(x => x.Tenant)
 			.WithMany()
 			.HasForeignKey(x => x.TenantId)
-			.OnDelete(DeleteBehavior.SetNull);
+			.OnDelete(DeleteBehavior.NoAction);
 
 		builder.HasIndex(x => new { x.TenantId, x.Name })
 			.IsUnique()
@@ -44,8 +44,6 @@ internal sealed class AccountConfig : EntityConfigBase<Account>
 
 		builder.OwnsOne(x => x.Address, owned =>
 		{
-			owned.Navigation(a => a).IsRequired(false);
-
 			owned.Property(a => a.First)
 				.HasColumnName($"{SqlServerDefaults.ADDRESS_PREFIX}{nameof(Address.First)}")
 				.HasMaxLength(200)
@@ -82,5 +80,7 @@ internal sealed class AccountConfig : EntityConfigBase<Account>
 				.IsUnicode(true)
 				.IsRequired(false);
 		});
+
+		builder.Navigation(x => x.Address).IsRequired(false);
 	}
 }

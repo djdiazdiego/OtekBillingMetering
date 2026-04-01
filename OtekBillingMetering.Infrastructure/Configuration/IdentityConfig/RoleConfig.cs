@@ -34,7 +34,7 @@ internal sealed class RoleConfig : EntityConfigBase<Role>
 			.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 		builder.HasMany(x => x.Policies)
-			.WithMany()
+			.WithMany(x => x.Roles)
 			.UsingEntity<Dictionary<string, object>>(
 				"RolePolicies",
 				p => p.HasOne<Policy>()

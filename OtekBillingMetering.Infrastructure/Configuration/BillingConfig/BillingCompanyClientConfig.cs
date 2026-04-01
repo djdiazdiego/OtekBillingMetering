@@ -48,8 +48,6 @@ internal sealed class BillingCompanyClientConfig : EntityConfigBase<BillingCompa
 
 		builder.OwnsOne(x => x.Address, owned =>
 		{
-			owned.Navigation(a => a).IsRequired(false);
-
 			owned.Property(a => a.First)
 				.HasColumnName($"{SqlServerDefaults.ADDRESS_PREFIX}{nameof(Address.First)}")
 				.HasMaxLength(200)
@@ -86,5 +84,7 @@ internal sealed class BillingCompanyClientConfig : EntityConfigBase<BillingCompa
 				.IsUnicode(true)
 				.IsRequired(false);
 		});
+
+		builder.Navigation(x => x.Address).IsRequired(false);
 	}
 }

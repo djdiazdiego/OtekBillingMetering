@@ -37,8 +37,6 @@ internal sealed class BillingCompanyConfig : EntityConfigBase<BillingCompany>
 
 		builder.OwnsOne(x => x.Address, owned =>
 		{
-			owned.Navigation(a => a).IsRequired(false);
-
 			owned.Property(a => a.First)
 				.HasColumnName($"{SqlServerDefaults.ADDRESS_PREFIX}{nameof(Address.First)}")
 				.HasMaxLength(200)
@@ -76,8 +74,10 @@ internal sealed class BillingCompanyConfig : EntityConfigBase<BillingCompany>
 				.IsRequired(false);
 		});
 
+		builder.Navigation(x => x.Address).IsRequired(false);
+
 		builder.Navigation(x => x.Clients).Metadata
-		.SetPropertyAccessMode(PropertyAccessMode.Field);
+			.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 		builder.Navigation(x => x.ClientLinks).Metadata
 			.SetPropertyAccessMode(PropertyAccessMode.Field);
